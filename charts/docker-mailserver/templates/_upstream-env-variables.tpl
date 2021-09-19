@@ -6,7 +6,7 @@ We list them here (and include this template in deployment.yaml) to keep deploym
 - name: OVERRIDE_HOSTNAME
   value: {{ .Values.pod.dockermailserver.override_hostname | quote }}
 - name: DMS_DEBUG
-  value: {{ .Values.pod.dockermailserver.dms_debug | quote }}              
+  value: {{ .Values.pod.dockermailserver.dms_debug | quote }}
 - name: ENABLE_CLAMAV
   value: {{ .Values.pod.dockermailserver.enable_clamav | quote }}
 - name: ONE_DIR
@@ -20,9 +20,9 @@ We list them here (and include this template in deployment.yaml) to keep deploym
 - name: SSL_TYPE
   value: {{ .Values.pod.dockermailserver.ssl_type | quote }}
 - name: SSL_CERT_PATH
-  value: {{ default "/tmp/ssl/tls.crt" .Values.pod.dockermailserver.ssl_cert_path | quote }}   
+  value: {{ default "/tmp/ssl/tls.crt" .Values.pod.dockermailserver.ssl_cert_path | quote }}
 - name: SSL_KEY_PATH
-  value: {{ default "/tmp/ssl/tls.key" .Values.pod.dockermailserver.ssl_key_path | quote }}                            
+  value: {{ default "/tmp/ssl/tls.key" .Values.pod.dockermailserver.ssl_key_path | quote }}
 - name: TLS_LEVEL
   value: {{ .Values.pod.dockermailserver.tls_level | quote }}
 - name: SPOOF_PROTECTION
