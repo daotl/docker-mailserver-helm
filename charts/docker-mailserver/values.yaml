@@ -123,6 +123,7 @@ pod:
     # pod.dockermailserver.override_hostname sets the hostname (and therefore the SMTP banner) of the docker-mailserver pod
     override_hostname: "mail.batcave.org"
     dms_debug: 0
+    enable_amavis: 1
     enable_clamav: 1
     one_dir: 1
     enable_pop3: 0

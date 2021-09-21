@@ -7,6 +7,8 @@ We list them here (and include this template in deployment.yaml) to keep deploym
   value: {{ .Values.pod.dockermailserver.override_hostname | quote }}
 - name: DMS_DEBUG
   value: {{ .Values.pod.dockermailserver.dms_debug | quote }}
+- name: ENABLE_AMAVIS
+  value: {{ .Values.pod.dockermailserver.enable_amavis | quote }}
 - name: ENABLE_CLAMAV
   value: {{ .Values.pod.dockermailserver.enable_clamav | quote }}
 - name: ONE_DIR
