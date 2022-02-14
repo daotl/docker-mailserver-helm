@@ -1,6 +1,6 @@
 ---
 image:
-  # image.name is the name of the container image to use. Refer to https://hub.docker.com/r/tvial/docker-mailserver
+  # image.name is the name of the container image to use. Refer to https://hub.docker.com/r/mailserver/docker-mailserver
   name: "mailserver/docker-mailserver"
   # image.tag is the tag of the container image to use. Refer to https://hub.docker.com/r/tvial/docker-mailserver
   tag: "10.1.2"
@@ -57,6 +57,15 @@ ssl:
 ##
 psp:
   create: true
+
+## Mount additional volumes into the container.  Useful for persistent logs or
+## injecting additional config files.
+#additionalVolumes:
+#  - name: "additional"
+#    emptyDir: {}
+#additionalVolumeMounts:
+#  - name: additional
+#    mountPath: /additional
 
 demoMode:
   # demoMode.enabled ignores the contents of helm-chart/docker-mailserver/config and creates minimal static configuration to be used instead. A single account (user "user@example.com", password "password") will be configured for the purpose of validating core functions and connectivity, before applying user config
