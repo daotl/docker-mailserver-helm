@@ -2,8 +2,8 @@
 image:
   # image.name is the name of the container image to use. Refer to https://hub.docker.com/r/mailserver/docker-mailserver
   name: "mailserver/docker-mailserver"
-  # image.tag is the tag of the container image to use. Refer to https://hub.docker.com/r/tvial/docker-mailserver
-  tag: "10.1.2"
+  # image.tag is the tag of the container image to use. Refer to https://hub.docker.com/r/mailserver/docker-mailserver
+  tag: "11.0.0"
   pullPolicy: "IfNotPresent"
 
 initContainer:
@@ -26,6 +26,12 @@ initContainer:
     readOnlyRootFilesystem: true
     privileged: false
 
+## Optionally specify a runtimeClassName for the deployment
+runtimeClassName: 
+
+## Optionally specify a priorityClassName for the deployment
+priorityClassName:
+
 serviceAccount:
   create: "true"
 
@@ -46,17 +52,12 @@ ssl:
   issuer:
     name: letsencrypt-staging
     kind: ClusterIssuer
-  hostname: mail.example.com
+  dnsname: example.com
 
   # Set this to false to let the chart try to assemble a CR for you. This feature will be deprecated soon, and users will
   # need to manage cert-manager outside of this chart (the dependencies involved make it fragile)
   useExisting: true
   existingName: name-of-existing-secret
-
-## Create the necessary PodSecurityPolicies (PSPs) for docker-mailserver, haproxy, and rainloop to work
-##
-psp:
-  create: true
 
 ## Mount additional volumes into the container.  Useful for persistent logs or
 ## injecting additional config files.
@@ -168,6 +169,8 @@ pod:
     report_sender:
     report_interval: "daily"
     enable_spamassassin: 1
+    sa_spam_to_inbox: 1
+    sa_move_spam_to_junk: 0
     sa_tag: 2.0
     sa_tag2: 6.31
     sa_kill: 6.31
@@ -175,6 +178,7 @@ pod:
     enable_fetchmail: 0
     fetchmail_poll: 300
     enable_ldap:
+    log_level: warn
     ldap_start_tls: # MUST BE "yes" or "no" - quoted strings
     ldap_server_host:
     ldap_search_base:
@@ -192,6 +196,7 @@ pod:
     dovecot_user_attrs:
     dovecot_pass_filter:
     dovecot_pass_attrs:
+    dovecot_mailbox_format:
     enable_postgrey: 0
     postgrey_delay: 300
     postgrey_max_age: 35

@@ -11,5 +11,5 @@ spec:
     kind: {{ default "ClusterIssuer" .Values.ssl.issuer.kind }}
   commonName: '{{ default "example.com" .Values.ssl.hostname }}'
   dnsNames:
-  - {{ default "example.com" .Values.ssl.hostname }}
+  - {{ default "example.com" .Values.ssl.dnsname }}
 {{- end -}}
